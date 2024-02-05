@@ -34,13 +34,17 @@ class HomePage extends StatelessWidget {
           padding: EdgeInsets.all(8.0),
           child: Column(
             children: [
-              HowToSection(description: "How to Make french toast"),
+              HowToSection(description: "How to make french toast"),
               ImageSection(image: 'assets/images/image-13.png'),
               ChefInfoSection(
                 name: 'Roberta Anny',
-                location: 'Bali Indonesia',
+                location: 'Bali, Indonesia',
                 image: 'assets/images/unsplash_Ij24Uq1sMwM.png',
               ),
+              IngredientsSection(
+                ingredient: 'Bread',
+                weight: '200g',
+              )
             ],
           ),
         ),
@@ -79,17 +83,23 @@ class ButtonSection extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              _showPopup(context);
-            },
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                _showPopup(context);
+              },
+            ),
           ),
-          IconButton(
-            icon: const Icon(Icons.more_horiz),
-            onPressed: () {
-              _showPopup(context);
-            },
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+              icon: const Icon(Icons.more_horiz),
+              onPressed: () {
+                _showPopup(context);
+              },
+            ),
           ),
         ],
       ),
@@ -104,12 +114,13 @@ class HowToSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(children: [
-        Text(description, style: const TextStyle(fontSize: 40)),
-      ]),
-    );
+    return Column(children: [
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(description,
+            style: const TextStyle(fontSize: 34, fontWeight: FontWeight.bold)),
+      ),
+    ]);
   }
 }
 
@@ -173,21 +184,22 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
               ? const Icon(Icons.star)
               : const Icon(Icons.star_border)),
           color: Colors.yellow[700],
-          // alignment: Alignment.bottomLeft,
         ),
         SizedBox(
-          width: 26,
+          width: 32,
           child: SizedBox(
               child: Text(
             '$_favoriteRating',
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
           )),
         ),
         SizedBox(
           width: 128,
           child: Text('($_favoriteCount Reviews)',
               style: const TextStyle(
-                  fontWeight: FontWeight.w500, color: Colors.grey)),
+                  fontWeight: FontWeight.w500,
+                  color: Colors.grey,
+                  fontSize: 17)),
         ),
       ],
     );
@@ -227,11 +239,18 @@ class ChefInfoSection extends StatelessWidget {
                     children: [
                       Text(
                         name,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
                       ),
-                      Text(
-                        location,
-                        style: const TextStyle(color: Colors.grey),
+                      Row(
+                        children: [
+                          const Icon(Icons.location_on, color: Colors.red),
+                          Text(
+                            location,
+                            style: const TextStyle(
+                                color: Colors.grey, fontSize: 17),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -273,6 +292,168 @@ class _FollowButtonState extends State<FollowButton> {
         _isFollowing ? 'Following' : 'Follow',
         style: const TextStyle(color: Colors.white),
       ),
+    );
+  }
+}
+
+class IngredientsSection extends StatelessWidget {
+  const IngredientsSection(
+      {super.key, required this.ingredient, required this.weight});
+
+  final String ingredient;
+  final String weight;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Ingredients',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+              ),
+              Text('5 Items',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 18,
+                      color: Colors.grey))
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: BorderRadius.circular(12.0),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        child: Image.asset(
+                          'assets/images/🍜.png',
+                          width: 70,
+                          height: 70,
+                        ),
+                      ),
+                    ),
+                    Text(ingredient,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 22)),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(weight,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 18,
+                          color: Colors.grey)),
+                )
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: BorderRadius.circular(12.0),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        child: Image.asset(
+                          'assets/images/🍜.png',
+                          width: 70,
+                          height: 70,
+                        ),
+                      ),
+                    ),
+                    Text(ingredient,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 22)),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(weight,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 18,
+                          color: Colors.grey)),
+                )
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: BorderRadius.circular(12.0),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        child: Image.asset(
+                          'assets/images/🍜.png',
+                          width: 70,
+                          height: 70,
+                        ),
+                      ),
+                    ),
+                    Text(ingredient,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 22)),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(weight,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 18,
+                          color: Colors.grey)),
+                )
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
