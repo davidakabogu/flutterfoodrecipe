@@ -35,7 +35,10 @@ class HomePage extends StatelessWidget {
           child: Column(
             children: [
               HowToSection(description: "How to make french toast"),
-              ImageSection(image: 'assets/images/image-13.png'),
+              ImageSection(
+                image: 'assets/images/image-13.png',
+                overlayImage: 'assets/images/Play-button.png',
+              ),
               ChefInfoSection(
                 name: 'Roberta Anny',
                 location: 'Bali, Indonesia',
@@ -125,22 +128,39 @@ class HowToSection extends StatelessWidget {
 }
 
 class ImageSection extends StatelessWidget {
-  const ImageSection({super.key, required this.image});
+  const ImageSection(
+      {super.key, required this.image, required this.overlayImage});
 
   final String image;
+  final String overlayImage;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(12.0),
-          child: Image.asset(
-            image,
-            width: 400,
-            height: 240,
-            fit: BoxFit.cover,
-          ),
+        Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12.0),
+              child: Image.asset(
+                image,
+                width: 400,
+                height: 240,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Positioned(
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Image.asset(
+                overlayImage,
+                width: 60,
+                height: 60,
+              ),
+            ),
+          ],
         ),
         const FavoriteWidget()
       ],
