@@ -388,14 +388,14 @@ class IngredientsSection extends StatelessWidget {
                                   : const Icon(Icons.image),
                             ),
                           ),
-                          Text(ingredients[index],
+                          Text(ingredient,
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 22)),
                         ],
                       ),
                       Padding(
                         padding: const EdgeInsets.all(16.0),
-                        child: Text(ingredientWeights[index],
+                        child: Text(weight,
                             style: const TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 18,
