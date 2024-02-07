@@ -45,8 +45,8 @@ class HomePage extends StatelessWidget {
                 image: 'assets/images/unsplash_Ij24Uq1sMwM.png',
               ),
               IngredientsSection(
-                ingredients: ['Bread', 'Eggs', 'Milk', 'Eggs', 'Bread'],
-                ingredientWeights: ['200g', '200g', '200g', '300g', '100kg'],
+                ingredients: ['Bread', 'Eggs', 'Milk', 'Ham', 'Cake'],
+                ingredientWeights: ['200g', '200g', '200g', '300g', '400g'],
               ),
             ],
           ),
@@ -328,6 +328,8 @@ class IngredientsSection extends StatelessWidget {
     'Eggs': 'assets/images/🍣.png',
     'Milk': 'assets/images/🍜.png',
     // Add more mappings for other ingredients as needed
+    'Ham': 'assets/images/🍣.png',
+    'Cake': 'assets/images/🍜.png',
   };
 
   @override
