@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -121,7 +122,8 @@ class HowToSection extends StatelessWidget {
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(description,
-            style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+            style:
+                GoogleFonts.poppins(fontSize: 32, fontWeight: FontWeight.w600)),
       ),
     ]);
   }
@@ -258,16 +260,16 @@ class ChefInfoSection extends StatelessWidget {
                     children: [
                       Text(
                         name,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
+                        style: GoogleFonts.poppins(
+                            fontSize: 20, fontWeight: FontWeight.w600),
                       ),
                       Row(
                         children: [
                           const Icon(Icons.location_on, color: Colors.red),
                           Text(
                             location,
-                            style: const TextStyle(
-                                color: Colors.grey, fontSize: 17),
+                            style: GoogleFonts.poppins(
+                                fontSize: 18, color: Colors.grey),
                           ),
                         ],
                       ),
@@ -305,11 +307,17 @@ class _FollowButtonState extends State<FollowButton> {
     return ElevatedButton(
       onPressed: _toggleFollow,
       style: ElevatedButton.styleFrom(
+        minimumSize: const Size(16, 45),
         backgroundColor: _isFollowing ? Colors.green : Colors.red,
+        shape: RoundedRectangleBorder(
+          // Adjust this value to change the button's roundness
+          borderRadius: BorderRadius.circular(13.0),
+        ),
       ),
       child: Text(
         _isFollowing ? 'Following' : 'Follow',
-        style: const TextStyle(color: Colors.white),
+        style: const TextStyle(
+            color: Colors.white, fontWeight: FontWeight.w800, fontSize: 16),
       ),
     );
   }
@@ -341,12 +349,13 @@ class IngredientsSection extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 'Ingredients',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w600, fontSize: 30),
               ),
               Text('${ingredients.length} items',
-                  style: const TextStyle(
+                  style: GoogleFonts.poppins(
                       fontWeight: FontWeight.w400,
                       fontSize: 18,
                       color: Colors.grey))
@@ -367,6 +376,7 @@ class IngredientsSection extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
+                    height: 100,
                     decoration: BoxDecoration(
                       color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(12.0),
@@ -393,14 +403,14 @@ class IngredientsSection extends StatelessWidget {
                               ),
                             ),
                             Text(ingredient,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 22)),
+                                style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w600, fontSize: 22)),
                           ],
                         ),
                         Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Text(weight,
-                              style: const TextStyle(
+                              style: GoogleFonts.poppins(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 18,
                                   color: Colors.grey)),
