@@ -177,18 +177,14 @@ class FavoriteWidget extends StatefulWidget {
 
 class _FavoriteWidgetState extends State<FavoriteWidget> {
   bool _isFavorited = true;
-  double _favoriteRating = 4.5;
-  int _favoriteCount = 300;
+  final String _favoriteRating = '4,5';
+  final int _favoriteCount = 300;
 
   void _toggleFavorite() {
     setState(() {
       if (_isFavorited) {
-        _favoriteRating -= 0.1;
-        _favoriteCount -= 1;
         _isFavorited = false;
       } else {
-        _favoriteRating += 0.1;
-        _favoriteCount += 1;
         _isFavorited = true;
       }
     });
@@ -198,19 +194,22 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        IconButton(
-          onPressed: _toggleFavorite,
-          icon: (_isFavorited
-              ? const Icon(Icons.star)
-              : const Icon(Icons.star_border)),
-          color: Colors.yellow[700],
+        SizedBox(
+          width: 35,
+          child: IconButton(
+            onPressed: _toggleFavorite,
+            icon: (_isFavorited
+                ? const Icon(Icons.star)
+                : const Icon(Icons.star_border)),
+            color: Colors.yellow[700],
+          ),
         ),
         SizedBox(
           width: 32,
           child: SizedBox(
               child: Text(
-            '$_favoriteRating',
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+            _favoriteRating,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           )),
         ),
         SizedBox(
@@ -344,7 +343,7 @@ class IngredientsSection extends StatelessWidget {
                 'Ingredients',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
               ),
-              Text('${ingredients.length} Items',
+              Text('${ingredients.length} items',
                   style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 18,
