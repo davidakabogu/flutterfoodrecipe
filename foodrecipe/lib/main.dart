@@ -45,9 +45,9 @@ class HomePage extends StatelessWidget {
                 image: 'assets/images/unsplash_Ij24Uq1sMwM.png',
               ),
               IngredientsSection(
-                ingredient: 'Bread',
-                weight: '200g',
-              )
+                ingredients: ['Bread', 'Eggs', 'Milk', 'Ham', 'DK Snack'],
+                ingredientWeights: ['200g', '200g', '200g', '300g', '100kg'],
+              ),
             ],
           ),
         ),
@@ -318,161 +318,80 @@ class _FollowButtonState extends State<FollowButton> {
 
 class IngredientsSection extends StatelessWidget {
   const IngredientsSection(
-      {super.key, required this.ingredient, required this.weight});
+      {super.key, required this.ingredients, required this.ingredientWeights});
 
-  final String ingredient;
-  final String weight;
+  final List<String> ingredients;
+  final List<String> ingredientWeights;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Padding(
-          padding: EdgeInsets.all(8.0),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 'Ingredients',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
               ),
-              Text('5 Items',
-                  style: TextStyle(
+              Text('${ingredients.length} Items',
+                  style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 18,
                       color: Colors.grey))
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(12.0),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(18.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        child: Image.asset(
-                          'assets/images/🍜.png',
-                          width: 70,
-                          height: 70,
-                        ),
+        ListView.builder(
+            shrinkWrap: true,
+            itemCount: ingredients.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(18.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              child: Image.asset(
+                                'assets/images/🍜.png',
+                                width: 70,
+                                height: 70,
+                              ),
+                            ),
+                          ),
+                          Text(ingredients[index],
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 22)),
+                        ],
                       ),
-                    ),
-                    Text(ingredient,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 22)),
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(ingredientWeights[index],
+                            style: const TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 18,
+                                color: Colors.grey)),
+                      )
+                    ],
+                  ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(weight,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 18,
-                          color: Colors.grey)),
-                )
-              ],
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(12.0),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(18.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        child: Image.asset(
-                          'assets/images/🍜.png',
-                          width: 70,
-                          height: 70,
-                        ),
-                      ),
-                    ),
-                    Text(ingredient,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 22)),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(weight,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 18,
-                          color: Colors.grey)),
-                )
-              ],
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(12.0),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(18.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        child: Image.asset(
-                          'assets/images/🍜.png',
-                          width: 70,
-                          height: 70,
-                        ),
-                      ),
-                    ),
-                    Text(ingredient,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 22)),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(weight,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 18,
-                          color: Colors.grey)),
-                )
-              ],
-            ),
-          ),
-        ),
+              );
+            }),
       ],
     );
   }
