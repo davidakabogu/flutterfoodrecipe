@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
                 image: 'assets/images/unsplash_Ij24Uq1sMwM.png',
               ),
               IngredientsSection(
-                ingredients: ['Bread', 'Eggs', 'Milk', 'Ham', 'DK Snack'],
+                ingredients: ['Bread', 'Eggs', 'Milk', 'Eggs', 'Bread'],
                 ingredientWeights: ['200g', '200g', '200g', '300g', '100kg'],
               ),
             ],
@@ -323,6 +323,14 @@ class IngredientsSection extends StatelessWidget {
   final List<String> ingredients;
   final List<String> ingredientWeights;
 
+  // Map each ingredient to its corresponding image asset
+  static Map<String, String> ingredientImages = {
+    'Bread': 'assets/images/🍜.png',
+    'Eggs': 'assets/images/🍣.png',
+    'Milk': 'assets/images/🍜.png',
+    // Add more mappings for other ingredients as needed
+  };
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -348,6 +356,10 @@ class IngredientsSection extends StatelessWidget {
             shrinkWrap: true,
             itemCount: ingredients.length,
             itemBuilder: (context, index) {
+              final ingredient = ingredients[index];
+              final weight = ingredientWeights[index];
+              final ingredientImage = ingredientImages[ingredient];
+
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
@@ -367,11 +379,13 @@ class IngredientsSection extends StatelessWidget {
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(12.0),
                               ),
-                              child: Image.asset(
-                                'assets/images/🍜.png',
-                                width: 70,
-                                height: 70,
-                              ),
+                              child: ingredientImage != null
+                                  ? Image.asset(
+                                      ingredientImage,
+                                      width: 70,
+                                      height: 70,
+                                    )
+                                  : const Icon(Icons.image),
                             ),
                           ),
                           Text(ingredients[index],
