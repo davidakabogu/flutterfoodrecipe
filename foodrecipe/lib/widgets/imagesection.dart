@@ -17,8 +17,8 @@ class ImageSection extends StatelessWidget {
               borderRadius: BorderRadius.circular(12.0),
               child: Image.asset(
                 image,
-                width: 400,
-                height: 240,
+                width: 395,
+                height: 220,
                 fit: BoxFit.cover,
               ),
             ),

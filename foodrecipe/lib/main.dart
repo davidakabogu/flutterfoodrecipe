@@ -30,6 +30,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 40,
         actions: const [
           ButtonSection(),
         ],
@@ -50,8 +51,14 @@ class HomePage extends StatelessWidget {
                 image: 'assets/images/unsplash_Ij24Uq1sMwM.png',
               ),
               IngredientsSection(
-                ingredients: ['Bread', 'Eggs', 'Milk', 'Ham', 'Cake'],
-                ingredientWeights: ['200g', '200g', '200g', '300g', '400g'],
+                ingredients: [
+                  'Bread',
+                  'Eggs',
+                  'Milk',
+                  'Strawberries',
+                  'Whipped Cream'
+                ],
+                ingredientWeights: ['200g', '200g', '200g', '300g', '50g'],
               ),
             ],
           ),

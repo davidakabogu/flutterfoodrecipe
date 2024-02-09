@@ -15,7 +15,7 @@ class ChefInfoSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 6.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -39,7 +39,8 @@ class ChefInfoSection extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          const Icon(Icons.location_on, color: Colors.red),
+                          const Icon(Icons.location_on,
+                              color: Color(0xFFE23E3E)),
                           Text(
                             location,
                             style: GoogleFonts.poppins(
@@ -82,7 +83,7 @@ class _FollowButtonState extends State<FollowButton> {
       onPressed: _toggleFollow,
       style: ElevatedButton.styleFrom(
         minimumSize: const Size(16, 45),
-        backgroundColor: _isFollowing ? Colors.green : Colors.red,
+        backgroundColor: _isFollowing ? Colors.green : const Color(0xFFE23E3E),
         shape: RoundedRectangleBorder(
           // Adjust this value to change the button's roundness
           borderRadius: BorderRadius.circular(13.0),

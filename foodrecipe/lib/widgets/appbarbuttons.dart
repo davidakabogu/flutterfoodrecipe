@@ -31,7 +31,7 @@ class ButtonSection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(left: 4.0, bottom: 4.0),
             child: IconButton(
               icon: const Icon(Icons.arrow_back),
               onPressed: () {
@@ -40,7 +40,7 @@ class ButtonSection extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(right: 4.0, bottom: 4.0),
             child: IconButton(
               icon: const Icon(Icons.more_horiz),
               onPressed: () {

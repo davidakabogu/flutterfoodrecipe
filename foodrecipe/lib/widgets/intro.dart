@@ -10,10 +10,10 @@ class HowToSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 6.0),
         child: Text('How to make $meal',
-            style:
-                GoogleFonts.poppins(fontSize: 32, fontWeight: FontWeight.w600)),
+            style: GoogleFonts.poppins(
+                fontSize: 30.2, fontWeight: FontWeight.w600)),
       ),
     ]);
   }

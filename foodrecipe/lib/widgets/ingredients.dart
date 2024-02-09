@@ -14,8 +14,8 @@ class IngredientsSection extends StatelessWidget {
     'Eggs': 'assets/images/🍣.png',
     'Milk': 'assets/images/🍜.png',
     // Add more mappings for other ingredients as needed
-    'Ham': 'assets/images/🍣.png',
-    'Cake': 'assets/images/🍜.png',
+    'Strawberries': 'assets/images/🍣.png',
+    'Whipped Cream': 'assets/images/🍜.png',
   };
 
   @override
@@ -23,14 +23,14 @@ class IngredientsSection extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 'Ingredients',
                 style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w600, fontSize: 30),
+                    fontWeight: FontWeight.w600, fontSize: 28),
               ),
               Text('${ingredients.length} items',
                   style: GoogleFonts.poppins(
@@ -52,7 +52,8 @@ class IngredientsSection extends StatelessWidget {
                 // Delay each item's animation
                 delay: Duration(milliseconds: index * 100),
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(
+                      left: 10.0, right: 10.0, bottom: 10.0),
                   child: Container(
                     height: 100,
                     decoration: BoxDecoration(
