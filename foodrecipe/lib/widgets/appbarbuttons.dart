@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
 
 class ButtonSection extends StatelessWidget {
@@ -17,6 +15,7 @@ class ButtonSection extends StatelessWidget {
               icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 showModalBottomSheet(
+                    isScrollControlled: true,
                     context: context,
                     builder: (BuildContext context) {
                       return const TransactionBottomSheet();
@@ -30,6 +29,7 @@ class ButtonSection extends StatelessWidget {
               icon: const Icon(Icons.more_horiz),
               onPressed: () {
                 showModalBottomSheet(
+                    isScrollControlled: true,
                     context: context,
                     builder: (BuildContext context) {
                       return const TransactionBottomSheet();
@@ -55,18 +55,30 @@ class _TransactionBottomSheetState extends State<TransactionBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SingleChildScrollView(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: <Widget>[
-          const Text(
-            'Add new transaction',
-            style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  'Add new transaction',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(
+                  width: 64,
+                  child: Spacer(),
+                ),
+                Icon(Icons.close)
+              ],
             ),
           ),
-          const SizedBox(height: 16.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
@@ -76,28 +88,41 @@ class _TransactionBottomSheetState extends State<TransactionBottomSheet> {
                     _isIncomeForm = true;
                   });
                 },
-                child: const Text(
+                child: Text(
                   'Income',
                   style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.grey),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: _isIncomeForm
+                        ? Colors.blue[900]
+                        : Colors.grey, // Check _isIncomeForm value
+                    decoration: _isIncomeForm
+                        ? TextDecoration.underline
+                        : TextDecoration.none,
+                    decorationThickness: _isIncomeForm ? 3.0 : 0.0,
+                  ),
                 ),
               ),
               TextButton(
-                onPressed: () {
-                  setState(() {
-                    _isIncomeForm = false;
-                  });
-                },
-                child: const Text(
-                  'Expense',
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.grey),
-                ),
-              )
+                  onPressed: () {
+                    setState(() {
+                      _isIncomeForm = false;
+                    });
+                  },
+                  child: Text(
+                    'Expense',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: !_isIncomeForm
+                          ? Colors.blue[900]
+                          : Colors.grey, // Check !_isIncomeForm value
+                      decoration: !_isIncomeForm
+                          ? TextDecoration.underline
+                          : TextDecoration.none,
+                      decorationThickness: !_isIncomeForm ? 3.0 : 0.0,
+                    ),
+                  ))
             ],
           ),
           AnimatedSwitcher(
@@ -136,83 +161,124 @@ class IncomeForm extends StatefulWidget {
 
 class _IncomeFormState extends State<IncomeForm> {
   final _formKey = GlobalKey<FormState>();
-  late String _name;
-  late String _username;
-  late String _password;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.only(top: 8, left: 12, right: 12, bottom: 32),
       child: Form(
         key: _formKey,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            const Text('Income name'),
             TextFormField(
-              decoration: const InputDecoration(labelText: 'Income name'),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: const BorderSide(width: 1.0),
+                ),
+                labelText: 'Property rent',
+                contentPadding: const EdgeInsets.symmetric(
+                    vertical: 12.0, horizontal: 10.0),
+              ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Enter name of Income';
                 }
                 return null;
               },
-              onSaved: (value) {
-                _name = value!;
-              },
-            ),
-            const SizedBox(height: 10),
-            TextFormField(
-              decoration: const InputDecoration(labelText: 'Select Account'),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'First Bank';
-                }
-                return null;
-              },
-              onSaved: (value) {
-                _username = value!;
-              },
-            ),
-            const SizedBox(height: 10),
-            TextFormField(
-              obscureText: true,
-              decoration: const InputDecoration(labelText: 'Transaction date'),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Enter the date';
-                }
-                return null;
-              },
-              onSaved: (value) {
-                _password = value!;
-              },
+              onSaved: (value) {},
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              // onPressed: _submitForm,
-              onPressed: () => {
-                showModalBottomSheet(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return const IncomeSuccessfulBottomSheet();
-                    })
+            const Text('Select Account'),
+            TextFormField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: const BorderSide(width: 1.0),
+                ),
+                labelText: 'FirstBank - 0022446688',
+                contentPadding: const EdgeInsets.symmetric(
+                    vertical: 12.0, horizontal: 10.0),
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Select Account';
+                }
+                return null;
               },
-              child: const Text('Submit'),
+              onSaved: (value) {},
+            ),
+            const SizedBox(height: 20),
+            const Text('Transaction date'),
+            TextFormField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: const BorderSide(width: 1.0),
+                ),
+                labelText: 'Date',
+                contentPadding: const EdgeInsets.symmetric(
+                    vertical: 12.0, horizontal: 10.0),
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Enter date of transaction';
+                }
+                return null;
+              },
+              onSaved: (value) {},
+            ),
+            const SizedBox(height: 20),
+            const Text('Amount'),
+            TextFormField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: const BorderSide(width: 1.0),
+                ),
+                labelText: '\$ 2000',
+                contentPadding: const EdgeInsets.symmetric(
+                    vertical: 12.0, horizontal: 10.0),
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Enter Amount';
+                }
+                return null;
+              },
+              onSaved: (value) {},
+            ),
+            const SizedBox(height: 20),
+            Container(
+              padding: const EdgeInsets.only(top: 8),
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () => {
+                  showModalBottomSheet(
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const ExpenseSuccessfulBottomSheet();
+                      })
+                },
+                style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    backgroundColor: Colors.blue[900],
+                    minimumSize: const Size(10.0, 44.0)),
+                child: const Text(
+                  'Add transaction',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
             ),
           ],
         ),
       ),
     );
-  }
-
-  void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-      // Do something with the form data, like sending it to a server
-      print('Name: $_name');
-      print('Username: $_username');
-      print('Password: $_password');
-    }
   }
 }
 
@@ -221,28 +287,40 @@ class IncomeSuccessfulBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.only(top: 24.0),
-          child: Icon(Icons.check_circle),
-        ),
-        SizedBox(height: 20),
-        Text(
-          'Successful',
-          style: TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
-        ),
-        Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Your income has been successfully added to earnings',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
-            ],
+    return const SingleChildScrollView(
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(top: 24.0),
+            child: Icon(
+              Icons.check_circle_outline,
+              size: 64,
+              color: Colors.green,
+            ),
           ),
-        )
-      ],
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              'Successful',
+              style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.green),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Your income has been successfully added to earnings',
+                    style:
+                        TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
@@ -257,83 +335,143 @@ class ExpenseForm extends StatefulWidget {
 
 class _ExpenseFormState extends State<ExpenseForm> {
   final _formKey = GlobalKey<FormState>();
-  late String _name;
-  late String _username;
-  late String _password;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.only(top: 8, left: 12, right: 12, bottom: 32),
       child: Form(
         key: _formKey,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            const Text('Transaction name'),
             TextFormField(
-              decoration: const InputDecoration(labelText: 'Transaction name'),
+              decoration: InputDecoration(
+                  labelText: 'Description',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                    borderSide: const BorderSide(width: 1.0),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                      vertical: 12.0, horizontal: 10.0)),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Description';
                 }
                 return null;
               },
-              onSaved: (value) {
-                _name = value!;
-              },
+              onSaved: (value) {},
             ),
             const SizedBox(height: 10),
+            const Text('Select the Budget'),
             TextFormField(
-              decoration: const InputDecoration(labelText: 'Select Category'),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: const BorderSide(width: 1.0),
+                ),
+                labelText: 'Enter desired budget',
+                contentPadding: const EdgeInsets.symmetric(
+                    vertical: 12.0, horizontal: 10.0),
+              ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Icon';
+                  return 'Select Budget';
                 }
                 return null;
               },
-              onSaved: (value) {
-                _username = value!;
-              },
+              onSaved: (value) {},
             ),
             const SizedBox(height: 10),
+            const Text('Select the Category'),
             TextFormField(
-              obscureText: true,
-              decoration: const InputDecoration(labelText: 'Transaction date'),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: const BorderSide(width: 1.0),
+                ),
+                labelText: 'Input Category',
+                contentPadding: const EdgeInsets.symmetric(
+                    vertical: 12.0, horizontal: 10.0),
+              ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Enter the date';
+                  return 'Select Category';
                 }
                 return null;
               },
-              onSaved: (value) {
-                _password = value!;
+              onSaved: (value) {},
+            ),
+            const SizedBox(height: 10),
+            const Text('Transaction date'),
+            TextFormField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: const BorderSide(width: 1.0),
+                ),
+                labelText: 'Date',
+                contentPadding: const EdgeInsets.symmetric(
+                    vertical: 12.0, horizontal: 10.0),
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Enter date of transaction';
+                }
+                return null;
               },
+              onSaved: (value) {},
+            ),
+            const SizedBox(height: 10),
+            const Text('Amount'),
+            TextFormField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: const BorderSide(width: 1.0),
+                ),
+                labelText: '\$ 00.00',
+                contentPadding: const EdgeInsets.symmetric(
+                    vertical: 12.0, horizontal: 10.0),
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Enter amount';
+                }
+                return null;
+              },
+              onSaved: (value) {},
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              // onPressed: _submitForm,
-              onPressed: () => {
-                showModalBottomSheet(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return const ExpenseSuccessfulBottomSheet();
-                    })
-              },
-              child: const Text('Submit'),
+            Container(
+              padding: const EdgeInsets.only(top: 8),
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () => {
+                  showModalBottomSheet(
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const ExpenseSuccessfulBottomSheet();
+                      })
+                },
+                style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    backgroundColor: Colors.blue[900],
+                    minimumSize: const Size(10.0, 44.0)),
+                child: const Text(
+                  'Add transaction',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
             ),
           ],
         ),
       ),
     );
-  }
-
-  void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-      // Do something with the form data, like sending it to a server
-      print('Name: $_name');
-      print('Username: $_username');
-      print('Password: $_password');
-    }
   }
 }
 
@@ -342,28 +480,36 @@ class ExpenseSuccessfulBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.only(top: 24.0),
-          child: Icon(Icons.check_circle),
-        ),
-        SizedBox(height: 20),
-        Text(
-          'Successful',
-          style: TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
-        ),
-        Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('expense has been successfully added to transactions',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
-            ],
+    return const SingleChildScrollView(
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(top: 24.0),
+            child: Icon(
+              Icons.check_circle_outline,
+              size: 64,
+              color: Colors.green,
+            ),
           ),
-        )
-      ],
+          SizedBox(height: 20),
+          Text(
+            'Successful',
+            style: TextStyle(
+                fontSize: 26, fontWeight: FontWeight.w500, color: Colors.green),
+          ),
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('expense has been successfully added to transactions',
+                    style:
+                        TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
