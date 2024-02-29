@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class ButtonSection extends StatelessWidget {
   const ButtonSection({super.key});
@@ -260,7 +261,7 @@ class _IncomeFormState extends State<IncomeForm> {
                       isScrollControlled: true,
                       context: context,
                       builder: (BuildContext context) {
-                        return const ExpenseSuccessfulBottomSheet();
+                        return const IncomeSuccessfulBottomSheet();
                       })
                 },
                 style: ElevatedButton.styleFrom(
@@ -287,39 +288,104 @@ class IncomeSuccessfulBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
-      child: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(top: 24.0),
-            child: Icon(
-              Icons.check_circle_outline,
-              size: 64,
-              color: Colors.green,
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(top: 24.0),
+              child: Icon(
+                Icons.check_circle_outline,
+                size: 64,
+                color: Colors.green,
+              ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text(
-              'Successful',
-              style: TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.green),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Successful',
+                style: TextStyle(
+                    fontSize: 26,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.green),
+              ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Your income has been successfully added to earnings',
-                    style:
-                        TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
-              ],
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                      textAlign: TextAlign.center,
+                      'Income successfully added to earnings',
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+                ],
+              ),
             ),
-          )
-        ],
+            Container(
+              decoration: BoxDecoration(
+                borderRadius:
+                    BorderRadius.circular(12.0), // Rounded border outline
+                border: Border.all(color: Colors.grey), // Border outline color
+              ),
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Stack(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.grey[350],
+                            ),
+                            padding: const EdgeInsets.all(
+                                8.0), // Adjust padding as needed
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12.0),
+                              child: const Icon(
+                                Icons.house,
+                                size: 32,
+                                color: Colors.blue,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Column(
+                        children: [Text('Property rent'), Text('Nov 18')],
+                      ),
+                    ],
+                  ),
+                  const Column(
+                    children: [Icon(Icons.more_vert), Text('\$2000')],
+                  )
+                ],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.only(top: 8),
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () => {},
+                style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    backgroundColor: Colors.blue[900],
+                    minimumSize: const Size(10.0, 44.0)),
+                child: const Text(
+                  'Done',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -480,35 +546,99 @@ class ExpenseSuccessfulBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
-      child: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(top: 24.0),
-            child: Icon(
-              Icons.check_circle_outline,
-              size: 64,
-              color: Colors.green,
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(top: 24.0),
+              child: Icon(
+                Icons.check_circle_outline,
+                size: 64,
+                color: Colors.green,
+              ),
             ),
-          ),
-          SizedBox(height: 20),
-          Text(
-            'Successful',
-            style: TextStyle(
-                fontSize: 26, fontWeight: FontWeight.w500, color: Colors.green),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Row(
+            const SizedBox(height: 20),
+            const Text(
+              'Successful',
+              style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.green),
+            ),
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('expense has been successfully added to transactions',
+                Text(
+                    textAlign: TextAlign.center,
+                    'expense has been successfully added to transactions',
                     style:
                         TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
               ],
             ),
-          )
-        ],
+            Container(
+              decoration: BoxDecoration(
+                borderRadius:
+                    BorderRadius.circular(12.0), // Rounded border outline
+                border: Border.all(color: Colors.grey), // Border outline color
+              ),
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Stack(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.grey[350],
+                            ),
+                            padding: const EdgeInsets.all(
+                                8.0), // Adjust padding as needed
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12.0),
+                              child: const Icon(
+                                Icons.shopping_cart_outlined,
+                                size: 32,
+                                color: Colors.green,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Column(
+                        children: [Text('Walmart'), Text('Nov 10')],
+                      ),
+                    ],
+                  ),
+                  const Column(
+                    children: [Icon(Icons.more_vert), Text('\$100')],
+                  )
+                ],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.only(top: 8),
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () => {},
+                style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    backgroundColor: Colors.blue[900],
+                    minimumSize: const Size(10.0, 44.0)),
+                child: const Text(
+                  'Done',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
