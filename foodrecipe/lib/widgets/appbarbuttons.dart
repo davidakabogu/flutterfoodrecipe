@@ -32,12 +32,273 @@ class ButtonSection extends StatelessWidget {
                     isScrollControlled: true,
                     context: context,
                     builder: (BuildContext context) {
-                      return const TransactionBottomSheet();
+                      return const AddAccountBottomSheet();
                     });
               },
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class AddAccountBottomSheet extends StatefulWidget {
+  const AddAccountBottomSheet({super.key});
+
+  @override
+  State<AddAccountBottomSheet> createState() => _AddAccountBottomSheetState();
+}
+
+class _AddAccountBottomSheetState extends State<AddAccountBottomSheet> {
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(right: 15, top: 8, bottom: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                const Text(
+                  'Add New Account',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                const SizedBox(
+                  width: 100,
+                  child: Spacer(),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Icon(Icons.close),
+                ),
+              ],
+            ),
+          ),
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.asset(
+                'assets/image.png', // Replace 'assets/image.png' with your actual asset path
+                width: 100,
+                height: 100,
+                errorBuilder: (BuildContext context, Object error,
+                    StackTrace? stackTrace) {
+                  // If the image fails to load, return a Container as placeholder
+                  return Container(
+                    width: 100,
+                    height: 100,
+                    color: Colors.grey, // Placeholder color
+                  );
+                },
+              ),
+              const Icon(
+                Icons.image,
+                size: 50,
+                color: Colors.blue,
+              ),
+            ],
+          ),
+          Container(
+            padding:
+                const EdgeInsets.only(top: 8, left: 20, right: 20, bottom: 58),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const Text('Bank Name'),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: const BorderSide(width: 1.0),
+                      ),
+                      labelText: 'Drop Down',
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 12.0, horizontal: 10.0),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Select Bank';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {},
+                  ),
+                  const SizedBox(height: 20),
+                  const Text('Account Number'),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: const BorderSide(width: 1.0),
+                      ),
+                      labelText: '0000000000',
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 12.0, horizontal: 10.0),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Enter Account Number';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {},
+                  ),
+                  const SizedBox(height: 20),
+                  const Text('Account Name'),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: const BorderSide(width: 1.0),
+                      ),
+                      labelText: 'Full Name',
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 12.0, horizontal: 10.0),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Enter name of account';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {},
+                  ),
+                  const SizedBox(height: 20),
+                  const Text('Account Balance'),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: const BorderSide(width: 1.0),
+                      ),
+                      labelText: '00.00',
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 12.0, horizontal: 10.0),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Enter acccount balance';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {},
+                  ),
+                  const SizedBox(height: 20),
+                  Container(
+                    padding: const EdgeInsets.only(top: 8),
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () => {
+                        showModalBottomSheet(
+                            isScrollControlled: true,
+                            context: context,
+                            builder: (BuildContext context) {
+                              return const AddAccountSuccessfulBottomSheet();
+                            })
+                      },
+                      style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          backgroundColor: const Color(0xFF1F1BF2),
+                          minimumSize: const Size(10.0, 44.0)),
+                      child: const Text(
+                        'Add transaction',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class AddAccountSuccessfulBottomSheet extends StatelessWidget {
+  const AddAccountSuccessfulBottomSheet({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 21, right: 21, bottom: 64),
+        child: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(top: 64.0),
+              child: Icon(
+                Icons.check_circle_outline,
+                size: 64,
+                color: Color(0xFF009517),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 16),
+              child: Text(
+                'Successful',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xFF009517),
+                ),
+              ),
+            ),
+            const Row(
+              children: [
+                Expanded(
+                  child: SizedBox(
+                    width: 320,
+                    child: Text(
+                        textAlign: TextAlign.center,
+                        'Your account has been successfully added',
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w600)),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 80,
+            ),
+            Container(
+              padding: const EdgeInsets.only(top: 8),
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () => {
+                  // Close the bottom sheet
+                  Navigator.of(context).pop()
+                },
+                style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    backgroundColor: const Color(0xFF1F1BF2),
+                    minimumSize: const Size(10.0, 44.0)),
+                child: const Text(
+                  'Done',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
