@@ -67,12 +67,13 @@ class _TransactionBottomSheetState extends State<TransactionBottomSheet> {
                 Text(
                   'Add new transaction',
                   style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
                 SizedBox(
-                  width: 64,
+                  width: 84,
                   child: Spacer(),
                 ),
                 Icon(Icons.close)
@@ -88,41 +89,76 @@ class _TransactionBottomSheetState extends State<TransactionBottomSheet> {
                     _isIncomeForm = true;
                   });
                 },
-                child: Text(
-                  'Income',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: _isIncomeForm
-                        ? Colors.blue[900]
-                        : Colors.grey, // Check _isIncomeForm value
-                    decoration: _isIncomeForm
-                        ? TextDecoration.underline
-                        : TextDecoration.none,
-                    decorationThickness: _isIncomeForm ? 3.0 : 0.0,
-                  ),
+                child: Stack(
+                  children: [
+                    Text(
+                      'Income',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: _isIncomeForm
+                            ? const Color(0xFF1F1BF2)
+                            : Colors.grey,
+                      ),
+                    ),
+                    Positioned(
+                      left: 0,
+                      right: 0,
+                      bottom:
+                          -2, // Adjust this value to change the distance between text and underline
+                      child: Container(
+                        height:
+                            4, // Adjust this value to change the thickness of the underline
+                        decoration: BoxDecoration(
+                          color: _isIncomeForm
+                              ? const Color(0xFF1F1BF2)
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(
+                              5.0), // Adjust this value to control the roundness of edges
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               TextButton(
-                  onPressed: () {
-                    setState(() {
-                      _isIncomeForm = false;
-                    });
-                  },
-                  child: Text(
-                    'Expense',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: !_isIncomeForm
-                          ? Colors.blue[900]
-                          : Colors.grey, // Check !_isIncomeForm value
-                      decoration: !_isIncomeForm
-                          ? TextDecoration.underline
-                          : TextDecoration.none,
-                      decorationThickness: !_isIncomeForm ? 3.0 : 0.0,
+                onPressed: () {
+                  setState(() {
+                    _isIncomeForm = false;
+                  });
+                },
+                child: Stack(
+                  children: [
+                    Text(
+                      'Expense',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: !_isIncomeForm
+                            ? const Color(0xFF1F1BF2)
+                            : Colors.grey,
+                      ),
                     ),
-                  ))
+                    Positioned(
+                      left: 0,
+                      right: 0,
+                      bottom:
+                          -2, // Adjust this value to change the distance between text and underline
+                      child: Container(
+                        height:
+                            4, // Adjust this value to change the thickness of the underline
+                        decoration: BoxDecoration(
+                          color: !_isIncomeForm
+                              ? const Color(0xFF1F1BF2)
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(
+                              5.0), // Adjust this value to control the roundness of edges
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
           AnimatedSwitcher(
@@ -221,6 +257,10 @@ class _IncomeFormState extends State<IncomeForm> {
                 labelText: 'Date',
                 contentPadding: const EdgeInsets.symmetric(
                     vertical: 12.0, horizontal: 10.0),
+                suffixIcon: const Icon(
+                  Icons.calendar_month_outlined,
+                  color: Colors.grey,
+                ),
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -267,7 +307,7 @@ class _IncomeFormState extends State<IncomeForm> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),
-                    backgroundColor: Colors.blue[900],
+                    backgroundColor: const Color(0xFF1F1BF2),
                     minimumSize: const Size(10.0, 44.0)),
                 child: const Text(
                   'Add transaction',
@@ -289,7 +329,7 @@ class IncomeSuccessfulBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.only(top: 8, left: 12, right: 12, bottom: 32),
+        padding: const EdgeInsets.only(top: 8, left: 21, right: 21, bottom: 64),
         child: Column(
           children: [
             const Padding(
@@ -297,7 +337,7 @@ class IncomeSuccessfulBottomSheet extends StatelessWidget {
               child: Icon(
                 Icons.check_circle_outline,
                 size: 64,
-                color: Colors.green,
+                color: Color(0xFF009517),
               ),
             ),
             const Padding(
@@ -305,9 +345,10 @@ class IncomeSuccessfulBottomSheet extends StatelessWidget {
               child: Text(
                 'Successful',
                 style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.green),
+                  fontSize: 24,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xFF009517),
+                ),
               ),
             ),
             const Padding(
@@ -315,11 +356,13 @@ class IncomeSuccessfulBottomSheet extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                      textAlign: TextAlign.center,
-                      'Income successfully added to earnings',
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+                  Expanded(
+                    child: Text(
+                        textAlign: TextAlign.center,
+                        'Your income has been successfully added to earnings',
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w600)),
+                  ),
                 ],
               ),
             ),
@@ -328,7 +371,8 @@ class IncomeSuccessfulBottomSheet extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius:
                     BorderRadius.circular(12.0), // Rounded border outline
-                border: Border.all(color: Colors.grey), // Border outline color
+                border: Border.all(
+                    color: const Color(0xFF7FA9DA)), // Border outline color
               ),
               padding: const EdgeInsets.all(12.0),
               child: Row(
@@ -343,12 +387,11 @@ class IncomeSuccessfulBottomSheet extends StatelessWidget {
                               shape: BoxShape.circle,
                               color: Colors.grey[350],
                             ),
-                            padding: const EdgeInsets.all(
-                                8.0), // Adjust padding as needed
+                            padding: const EdgeInsets.all(10.0),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(12.0),
                               child: const Icon(
-                                Icons.house,
+                                Icons.maps_home_work_outlined,
                                 size: 32,
                                 color: Colors.blue,
                               ),
@@ -356,13 +399,38 @@ class IncomeSuccessfulBottomSheet extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const Column(
-                        children: [Text('Property rent'), Text('Nov 18')],
+                      const Padding(
+                        padding: EdgeInsets.only(left: 12.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Property rent',
+                              style: TextStyle(
+                                color: Color(0xFF0C0C0C),
+                                fontSize: 18,
+                                fontWeight: FontWeight.w400,
+                                height: 0,
+                              ),
+                            ),
+                            Text(
+                              'Nov 18',
+                              style: TextStyle(color: Colors.grey),
+                            )
+                          ],
+                        ),
                       ),
                     ],
                   ),
                   const Column(
-                    children: [Icon(Icons.more_vert), Text('\$2000')],
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Icon(
+                        Icons.more_vert,
+                        color: Colors.grey,
+                      ),
+                      Text('\$2000')
+                    ],
                   )
                 ],
               ),
@@ -372,12 +440,15 @@ class IncomeSuccessfulBottomSheet extends StatelessWidget {
               padding: const EdgeInsets.only(top: 8),
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () => {},
+                onPressed: () => {
+                  // Close the bottom sheet
+                  Navigator.of(context).pop()
+                },
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),
-                    backgroundColor: Colors.blue[900],
+                    backgroundColor: const Color(0xFF1F1BF2),
                     minimumSize: const Size(10.0, 44.0)),
                 child: const Text(
                   'Done',
@@ -481,6 +552,10 @@ class _ExpenseFormState extends State<ExpenseForm> {
                 labelText: 'Date',
                 contentPadding: const EdgeInsets.symmetric(
                     vertical: 12.0, horizontal: 10.0),
+                suffixIcon: const Icon(
+                  Icons.calendar_month_outlined,
+                  color: Colors.grey,
+                ),
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -527,7 +602,7 @@ class _ExpenseFormState extends State<ExpenseForm> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),
-                    backgroundColor: Colors.blue[900],
+                    backgroundColor: const Color(0xFF1F1BF2),
                     minimumSize: const Size(10.0, 44.0)),
                 child: const Text(
                   'Add transaction',
@@ -549,7 +624,7 @@ class ExpenseSuccessfulBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.only(top: 8, left: 12, right: 12, bottom: 32),
+        padding: const EdgeInsets.only(top: 8, left: 21, right: 21, bottom: 64),
         child: Column(
           children: [
             const Padding(
@@ -557,7 +632,7 @@ class ExpenseSuccessfulBottomSheet extends StatelessWidget {
               child: Icon(
                 Icons.check_circle_outline,
                 size: 64,
-                color: Colors.green,
+                color: Color(0xFF009517),
               ),
             ),
             const Padding(
@@ -565,19 +640,22 @@ class ExpenseSuccessfulBottomSheet extends StatelessWidget {
               child: Text(
                 'Successful',
                 style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.green),
+                  fontSize: 24,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xFF009517),
+                ),
               ),
             ),
             const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                    textAlign: TextAlign.center,
-                    'expense has been successfully added to transactions',
-                    style:
-                        TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+                Expanded(
+                  child: Text(
+                      textAlign: TextAlign.center,
+                      'Your expense has been successfully added to transactions',
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+                ),
               ],
             ),
             const SizedBox(
@@ -587,7 +665,8 @@ class ExpenseSuccessfulBottomSheet extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius:
                     BorderRadius.circular(12.0), // Rounded border outline
-                border: Border.all(color: Colors.grey), // Border outline color
+                border: Border.all(
+                    color: const Color(0xFF7FA9DA)), // Border outline color
               ),
               padding: const EdgeInsets.all(12.0),
               child: Row(
@@ -602,10 +681,9 @@ class ExpenseSuccessfulBottomSheet extends StatelessWidget {
                               shape: BoxShape.circle,
                               color: Colors.grey[350],
                             ),
-                            padding: const EdgeInsets.all(
-                                8.0), // Adjust padding as needed
+                            padding: const EdgeInsets.all(10.0),
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(12.0),
+                              borderRadius: BorderRadius.circular(10.0),
                               child: const Icon(
                                 Icons.shopping_cart_outlined,
                                 size: 32,
@@ -615,13 +693,40 @@ class ExpenseSuccessfulBottomSheet extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const Column(
-                        children: [Text('Walmart'), Text('Nov 10')],
+                      const Padding(
+                        padding: EdgeInsets.only(left: 12.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Walmart',
+                              style: TextStyle(
+                                color: Color(0xFF0C0C0C),
+                                fontSize: 18,
+                                fontWeight: FontWeight.w400,
+                                height: 0,
+                              ),
+                            ),
+                            Text(
+                              'Nov 10',
+                              style: TextStyle(
+                                color: Colors.grey,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ],
                   ),
                   const Column(
-                    children: [Icon(Icons.more_vert), Text('\$100')],
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Icon(
+                        Icons.more_vert,
+                        color: Colors.grey,
+                      ),
+                      Text('\$100')
+                    ],
                   )
                 ],
               ),
@@ -633,12 +738,15 @@ class ExpenseSuccessfulBottomSheet extends StatelessWidget {
               padding: const EdgeInsets.only(top: 8),
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () => {},
+                onPressed: () => {
+                  // Close the bottom sheet
+                  Navigator.of(context).pop()
+                },
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),
-                    backgroundColor: Colors.blue[900],
+                    backgroundColor: const Color(0xFF1F1BF2),
                     minimumSize: const Size(10.0, 44.0)),
                 child: const Text(
                   'Done',
