@@ -59,12 +59,12 @@ class _TransactionBottomSheetState extends State<TransactionBottomSheet> {
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: <Widget>[
-          const Padding(
-            padding: EdgeInsets.all(8.0),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(
+                const Text(
                   'Add new transaction',
                   style: TextStyle(
                     fontSize: 16,
@@ -72,11 +72,16 @@ class _TransactionBottomSheetState extends State<TransactionBottomSheet> {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 84,
                   child: Spacer(),
                 ),
-                Icon(Icons.close)
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Icon(Icons.close),
+                ),
               ],
             ),
           ),
