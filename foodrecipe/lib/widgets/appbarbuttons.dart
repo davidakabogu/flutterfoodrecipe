@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class ButtonSection extends StatelessWidget {
   const ButtonSection({super.key});
@@ -290,7 +289,7 @@ class IncomeSuccessfulBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(18.0),
+        padding: const EdgeInsets.only(top: 8, left: 12, right: 12, bottom: 32),
         child: Column(
           children: [
             const Padding(
@@ -324,13 +323,14 @@ class IncomeSuccessfulBottomSheet extends StatelessWidget {
                 ],
               ),
             ),
+            const SizedBox(height: 20),
             Container(
               decoration: BoxDecoration(
                 borderRadius:
                     BorderRadius.circular(12.0), // Rounded border outline
                 border: Border.all(color: Colors.grey), // Border outline color
               ),
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(12.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -367,6 +367,7 @@ class IncomeSuccessfulBottomSheet extends StatelessWidget {
                 ],
               ),
             ),
+            const SizedBox(height: 10),
             Container(
               padding: const EdgeInsets.only(top: 8),
               width: double.infinity,
@@ -548,7 +549,7 @@ class ExpenseSuccessfulBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.only(top: 8, left: 12, right: 12, bottom: 32),
         child: Column(
           children: [
             const Padding(
@@ -559,13 +560,15 @@ class ExpenseSuccessfulBottomSheet extends StatelessWidget {
                 color: Colors.green,
               ),
             ),
-            const SizedBox(height: 20),
-            const Text(
-              'Successful',
-              style: TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.green),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Successful',
+                style: TextStyle(
+                    fontSize: 26,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.green),
+              ),
             ),
             const Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -577,13 +580,16 @@ class ExpenseSuccessfulBottomSheet extends StatelessWidget {
                         TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
               ],
             ),
+            const SizedBox(
+              height: 20,
+            ),
             Container(
               decoration: BoxDecoration(
                 borderRadius:
                     BorderRadius.circular(12.0), // Rounded border outline
                 border: Border.all(color: Colors.grey), // Border outline color
               ),
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(12.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -619,6 +625,9 @@ class ExpenseSuccessfulBottomSheet extends StatelessWidget {
                   )
                 ],
               ),
+            ),
+            const SizedBox(
+              height: 10,
             ),
             Container(
               padding: const EdgeInsets.only(top: 8),
